@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+class BankAccount {
+    int accountNumber;
+    String accountHolderName;
+    double balance;
+
+    BankAccount() {
+        accountNumber = 0;
+        accountHolderName = "Unknown";
+        balance = 0;
+    }
+
+
+    BankAccount(int accountNumber, String accountHolderName, double balance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = balance;
+    }
+
+    void deposit(double amount) {
+        balance = balance + amount;
+        System.out.println("Deposit: " + amount);
+    }
+
+    void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient Balance!");
+        } else {
+            balance = balance - amount;
+            System.out.println("Withdraw: " + amount);
+        }
+    }
+
+
+    void displayAccount() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolderName);
+        System.out.println("Balance: " + balance);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        BankAccount account1 = new BankAccount();
+
+        System.out.println("Enter Account Number:");
+        account1.accountNumber = sc.nextInt();
+
+        sc.nextLine();
+        System.out.println("Enter Account Holder Name:");
+        account1.accountHolderName = sc.nextLine();
+
+        System.out.println("Enter Initial Balance:");
+        account1.balance = sc.nextDouble();
+
+        System.out.println("\n--- Account 1 ---");
+        account1.displayAccount();
+
+        System.out.println("Enter Deposit Amount:");
+        double depositAmount = sc.nextDouble();
+        account1.deposit(depositAmount);
+
+        System.out.println("Enter Withdraw Amount:");
+        double withdrawAmount = sc.nextDouble();
+        account1.withdraw(withdrawAmount);
+
+        System.out.println("Updated Account Details:");
+        account1.displayAccount();
+
+
+  
+        BankAccount account2 = new BankAccount(101, "Rahul", 25000);
+
+        System.out.println("\n--- Account 2 ---");
+        account2.displayAccount();
+
+        account2.deposit(5000);
+        account2.withdraw(3000);
+
+        System.out.println("Updated Balance: " + account2.balance);
+
+        sc.close();
+    }
+}
